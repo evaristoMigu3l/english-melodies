@@ -1,0 +1,126 @@
+.home-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.now-playing-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.now-playing-header svg {
+  color: #a78bfa;
+}
+
+.now-playing-label {
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+.song-title {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Two Column Layout */
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 1.5rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.player-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-column .music-player {
+  margin: 0;
+}
+
+.lyrics-column {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* No Song State */
+.no-song {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.no-song-content {
+  text-align: center;
+  background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%);
+  padding: 3rem 4rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.no-song-icon {
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.no-song-content h2 {
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+}
+
+.no-song-content p {
+  color: #a0aec0;
+  margin: 0 0 1.5rem 0;
+}
+
+.add-song-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.add-song-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+/* Mobile Layout */
+@media (max-width: 900px) {
+  .home-page {
+    height: auto;
+    min-height: calc(100vh - 70px);
+    overflow: auto;
+    padding: 1rem;
+  }
+  
+  .two-column-layout {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  
+  .lyrics-column {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,49 @@
+.lyrics-container {
+  padding: 1rem 0;
+}
+
+.lyrics-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lyrics-line:last-child {
+  border-bottom: none;
+}
+
+.word-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.original-word {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.pronunciation-word {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #a78bfa;
+}
+
+@media (max-width: 600px) {
+  .original-word {
+    font-size: 1.2rem;
+  }
+  
+  .pronunciation-word {
+    font-size: 1rem;
+  }
+  
+  .lyrics-line {
+    gap: 0.5rem 1rem;
+  }
+}
