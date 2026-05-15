@@ -54,11 +54,6 @@ function LoginPage() {
 
   return (
     <div className="login-page">
-      {/* Ambient orbs */}
-      <span className="login-orb login-orb-1" />
-      <span className="login-orb login-orb-2" />
-      <span className="login-orb login-orb-3" />
-
       {/* ── Left: Hero ── */}
       <div className="login-hero-panel">
         <div className="login-brand">
