@@ -16,8 +16,16 @@ export const extractVocabularyFromLyrics = async (lyrics) => {
   })
 
   if (response.error) {
-    // Supabase functions.invoke wraps edge function errors
-    const errorMsg = response.error.message || 'Failed to generate vocabulary'
+    // Try to extract the real error from the edge function response
+    let errorMsg = 'Failed to generate vocabulary'
+
+    // If the edge function returned JSON with an error field
+    if (response.data && response.data.error) {
+      errorMsg = response.data.error
+    } else if (response.error.message) {
+      errorMsg = response.error.message
+    }
+
     throw new Error(errorMsg)
   }
 

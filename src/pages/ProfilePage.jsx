@@ -91,24 +91,24 @@ function ProfilePage() {
             {profile?.avatar_url ? (
               <img src={profile.avatar_url} alt={profile.display_name} referrerPolicy="no-referrer" />
             ) : (
-              <User size={40} />
+              <User size={48} strokeWidth={1.5} />
             )}
           </div>
           <div className="profile-details">
             <h1>{profile?.display_name || 'User'}</h1>
             <div className="profile-meta">
               <span className="meta-item">
-                <Mail size={14} />
+                <Mail size={14} strokeWidth={2} />
                 {profile?.email || user?.email}
               </span>
               <span className="meta-item">
-                <Calendar size={14} />
+                <Calendar size={14} strokeWidth={2} />
                 Joined {profile?.created_at ? formatDate(profile.created_at) : 'Recently'}
               </span>
             </div>
           </div>
           <button className="signout-btn" onClick={handleSignOut}>
-            <LogOut size={18} />
+            <LogOut size={18} strokeWidth={2} />
             Sign Out
           </button>
         </div>
@@ -116,21 +116,21 @@ function ProfilePage() {
 
       <div className="profile-stats">
         <div className="stat-card">
-          <Zap size={24} />
+          <Zap size={28} strokeWidth={1.5} color="var(--accent-primary)" />
           <div className="stat-info">
             <span className="stat-value">{profile?.generations_used || 0} / {profile?.generation_limit || 1}</span>
             <span className="stat-label">Generations Used</span>
           </div>
         </div>
         <div className="stat-card">
-          <BookOpen size={24} />
+          <BookOpen size={28} strokeWidth={1.5} color="var(--accent-primary)" />
           <div className="stat-info">
             <span className="stat-value">{savedVocabs.length}</span>
             <span className="stat-label">Saved Vocabularies</span>
           </div>
         </div>
         <div className="stat-card">
-          <Award size={24} />
+          <Award size={28} strokeWidth={1.5} color="var(--accent-primary)" />
           <div className="stat-info">
             <span className="stat-value">{savedQuizzes.length}</span>
             <span className="stat-label">Quiz Results</span>
@@ -143,14 +143,14 @@ function ProfilePage() {
           className={`tab-btn ${activeTab === 'vocabs' ? 'active' : ''}`}
           onClick={() => setActiveTab('vocabs')}
         >
-          <BookOpen size={18} />
+          <BookOpen size={18} strokeWidth={2} />
           My Vocabularies
         </button>
         <button
           className={`tab-btn ${activeTab === 'quizzes' ? 'active' : ''}`}
           onClick={() => setActiveTab('quizzes')}
         >
-          <Award size={18} />
+          <Award size={18} strokeWidth={2} />
           Quiz Results
         </button>
       </div>
@@ -164,7 +164,7 @@ function ProfilePage() {
         ) : activeTab === 'vocabs' ? (
           savedVocabs.length === 0 ? (
             <div className="empty-tab">
-              <BookOpen size={48} />
+              <BookOpen size={56} strokeWidth={1.5} color="var(--text-tertiary)" />
               <h3>No Saved Vocabularies</h3>
               <p>Generate vocabulary from a song to see it here!</p>
             </div>
@@ -197,7 +197,7 @@ function ProfilePage() {
         ) : (
           savedQuizzes.length === 0 ? (
             <div className="empty-tab">
-              <Award size={48} />
+              <Award size={56} strokeWidth={1.5} color="var(--text-tertiary)" />
               <h3>No Quiz Results</h3>
               <p>Take a quiz after generating vocabulary to see your results here!</p>
             </div>

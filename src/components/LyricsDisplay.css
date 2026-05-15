@@ -8,7 +8,7 @@
   gap: 0.75rem 1.25rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-glass);
 }
 
 .lyrics-line:last-child {
@@ -23,20 +23,22 @@
 }
 
 .original-word {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .pronunciation-word {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #a78bfa;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 600px) {
   .original-word {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   
   .pronunciation-word {

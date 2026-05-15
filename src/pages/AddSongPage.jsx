@@ -84,7 +84,7 @@ function AddSongPage() {
     <div className="add-song-page">
       <header className="page-header">
         <div className="header-title">
-          <PlusCircle size={28} />
+          <PlusCircle size={32} strokeWidth={2} color="var(--accent-primary)" />
           <h1>Add New Song</h1>
         </div>
       </header>
@@ -93,7 +93,7 @@ function AddSongPage() {
         <form onSubmit={handleSubmit} className="song-form">
           <div className="form-group">
             <label>
-              <Music size={16} />
+              <Music size={18} strokeWidth={1.5} color="var(--accent-primary)" />
               Song Title
             </label>
             <input
@@ -106,7 +106,7 @@ function AddSongPage() {
 
           <div className="form-group">
             <label>
-              <LinkIcon size={16} />
+              <LinkIcon size={18} strokeWidth={1.5} color="var(--accent-primary)" />
               YouTube or Audio URL
             </label>
             <input
@@ -120,7 +120,7 @@ function AddSongPage() {
 
           <div className="form-group">
             <label>
-              <FileText size={16} />
+              <FileText size={18} strokeWidth={1.5} color="var(--accent-primary)" />
               Lyrics with Pronunciation
             </label>
             <p className="helper-text">
@@ -129,18 +129,14 @@ function AddSongPage() {
             <textarea
               value={combinedLyrics}
               onChange={(e) => setCombinedLyrics(e.target.value)}
-              placeholder={`Hello, it's me
-[rê-lo, its mi]
-
-I was wondering if after all these years
-[ai uas uén-der-ring if áf-ter ôl diz yers]`}
+              placeholder={`Hello, it's me\n[rê-lo, its mi]\n\nI was wondering if after all these years\n[ai uas uén-der-ring if áf-ter ôl diz yers]`}
               rows="14"
               required
             />
           </div>
 
           <button type="submit" className="submit-button" disabled={saving}>
-            <Save size={18} />
+            <Save size={20} strokeWidth={1.5} />
             {saving ? 'Saving...' : 'Save & Play'}
           </button>
         </form>

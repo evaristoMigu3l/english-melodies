@@ -1,18 +1,22 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+  background: var(--bg-primary);
 }
 
 .main-content {
   flex: 1;
-  margin-left: 240px;
+  margin-left: 260px;
   min-height: 100vh;
+  padding: 2rem 2.5rem;
+  overflow-y: auto;
+  position: relative;
 }
 
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    margin-bottom: 70px;
+    margin-bottom: 72px;
+    padding: 1rem 1.25rem;
   }
 }

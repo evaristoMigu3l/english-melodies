@@ -1,16 +1,18 @@
 .song-form-container {
-  background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%);
-  border-radius: 16px;
-  padding: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
   margin: 20px auto;
   max-width: 600px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .song-form-container h2 {
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -27,41 +29,40 @@
 }
 
 .form-group label {
-  color: #e2e8f0;
-  font-weight: 600;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-left: 0.25rem;
 }
 
 .helper-text {
-  color: #a0aec0;
+  color: var(--text-tertiary);
   font-size: 0.85rem;
-  margin: 0;
-  font-style: italic;
+  margin: 0 0 0 0.25rem;
 }
 
 .form-group input,
 .form-group textarea {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 14px 16px;
-  color: #ffffff;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  color: var(--text-primary);
   font-size: 1rem;
-  transition: all 0.3s ease;
-  font-family: inherit;
+  transition: var(--transition-fast);
+  font-family: var(--font-body);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #718096;
+  color: var(--text-muted);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  border-color: var(--text-primary);
+  background: var(--bg-secondary);
 }
 
 .form-group textarea {
@@ -71,26 +72,25 @@
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg-primary);
   border: none;
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-  margin-top: 0.5rem;
+  transition: var(--transition-fast);
+  margin-top: 1rem;
 }
 
 .submit-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  background: var(--text-secondary);
 }
 
 .submit-button:active {
-  transform: translateY(-1px);
+  transform: translateY(0);
 }
 
 @media (max-width: 480px) {
@@ -100,6 +100,7 @@
   }
   
   .song-form-container h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 }

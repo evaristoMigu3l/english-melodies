@@ -78,7 +78,7 @@ function VocabularyPage() {
     setSaved(false)
     try {
       const lyricsText = Array.isArray(selectedSong.lyrics)
-        ? selectedSong.lyrics.join('\n')
+        ? selectedSong.lyrics.map(line => typeof line === 'object' ? line.original : line).join('\n')
         : String(selectedSong.lyrics)
       const truncated = lyricsText.slice(0, 1500)
       const data = await extractVocabularyFromLyrics(truncated)
@@ -207,11 +207,11 @@ function VocabularyPage() {
       <div className="vocab-page">
         <header className="page-header">
           <div className="header-title">
-            <BookOpen size={28} />
+            <BookOpen size={32} strokeWidth={2} color="var(--accent-primary)" />
             <h1>Vocabulary Builder</h1>
           </div>
           <div className="generation-badge">
-            <Zap size={16} />
+            <Zap size={16} strokeWidth={2} />
             <span>{profile?.generations_used || 0} / {profile?.generation_limit || 1} generations used</span>
           </div>
         </header>
@@ -227,7 +227,7 @@ function VocabularyPage() {
             </div>
           ) : songs.length === 0 ? (
             <div className="empty-state" style={{ paddingTop: '3rem' }}>
-              <Music size={64} className="empty-icon" />
+              <Music size={64} strokeWidth={1.5} className="empty-icon" />
               <h2>No Songs Available</h2>
               <p>Add some songs to your playlist first!</p>
             </div>
@@ -243,7 +243,7 @@ function VocabularyPage() {
                     {getYouTubeThumb(song.audio_url) ? (
                       <img src={getYouTubeThumb(song.audio_url)} alt={song.title} />
                     ) : (
-                      <Music size={32} />
+                      <Music size={36} strokeWidth={1.5} color="var(--accent-primary)" />
                     )}
                   </div>
                   <div className="song-select-info">
@@ -265,13 +265,13 @@ function VocabularyPage() {
       <header className="page-header">
         <div className="header-title">
           <button className="back-btn" onClick={() => setSelectedSong(null)}>
-            <ArrowLeft size={20} />
+            <ArrowLeft size={22} strokeWidth={2} />
           </button>
-          <BookOpen size={28} />
+          <BookOpen size={32} strokeWidth={2} color="var(--accent-primary)" />
           <h1>Vocabulary: {selectedSong.title}</h1>
         </div>
         <div className="generation-badge">
-          <Zap size={16} />
+          <Zap size={16} strokeWidth={2} />
           <span>{profile?.generations_used || 0} / {profile?.generation_limit || 1} used</span>
         </div>
       </header>
@@ -287,7 +287,7 @@ function VocabularyPage() {
                 ⚡ You have {(profile?.generation_limit || 1) - (profile?.generations_used || 0)} generation{(profile?.generation_limit || 1) - (profile?.generations_used || 0) !== 1 ? 's' : ''} remaining.
               </p>
               <button className="primary-btn" onClick={generateVocab}>
-                <RefreshCw size={18} className="btn-icon" />
+                <RefreshCw size={18} strokeWidth={2} className="btn-icon" />
                 Generate Vocabulary
               </button>
             </>
@@ -321,13 +321,13 @@ function VocabularyPage() {
           <div className="vocab-actions">
             {!saved && (
               <button className="save-btn" onClick={saveVocab} disabled={saving}>
-                <Save size={18} className="btn-icon" />
+                <Save size={18} strokeWidth={2} className="btn-icon" />
                 {saving ? 'Saving...' : 'Save Vocabulary'}
               </button>
             )}
-            {saved && <span className="saved-indicator"><CheckCircle2 size={18} /> Saved!</span>}
+            {saved && <span className="saved-indicator"><CheckCircle2 size={18} strokeWidth={2} /> Saved!</span>}
             <button className="secondary-btn" onClick={startQuiz}>
-              <HelpCircle size={18} className="btn-icon" />
+              <HelpCircle size={18} strokeWidth={2} className="btn-icon" />
               Take a Quiz
             </button>
           </div>
@@ -335,12 +335,19 @@ function VocabularyPage() {
             {vocabItems.map((item, index) => (
               <div key={index} className="vocab-card">
                 <div className="vocab-word">
-                  <h3>{item.word}</h3>
+                  <div className="word-header-info">
+                    <h3>{item.word}</h3>
+                    {item.pronunciation && <span className="pronunciation">{item.pronunciation}</span>}
+                  </div>
                   <span className="pos">{item.partOfSpeech}</span>
                 </div>
                 <div className="vocab-definition">
                   <p><strong>Definition:</strong> {item.definition}</p>
-                  <p className="example-sentence">"{item.example}"</p>
+                  <p className="example-sentence">
+                    "{item.example.split(/\*\*(.*?)\*\*/g).map((part, i) => 
+                      i % 2 === 1 ? <mark key={i}>{part}</mark> : part
+                    )}"
+                  </p>
                 </div>
               </div>
             ))}
@@ -393,9 +400,9 @@ function VocabularyPage() {
               {feedback && (
                 <div className={`feedback ${feedback.isCorrect ? 'correct' : 'incorrect'}`}>
                   {feedback.isCorrect ? (
-                    <><CheckCircle2 size={20}/> Correct!</>
+                    <><CheckCircle2 size={20} strokeWidth={2}/> Correct!</>
                   ) : (
-                    <><XCircle size={20}/> Incorrect. The correct answer is: {feedback.correctAnswer}</>
+                    <><XCircle size={20} strokeWidth={2}/> Incorrect. The correct answer is: {feedback.correctAnswer}</>
                   )}
                 </div>
               )}

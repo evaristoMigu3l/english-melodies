@@ -10,9 +10,7 @@ function HomePage() {
 
   useEffect(() => {
     const savedSong = localStorage.getItem('currentSong')
-    if (savedSong) {
-      setSong(JSON.parse(savedSong))
-    }
+    if (savedSong) setSong(JSON.parse(savedSong))
   }, [])
 
   return (
@@ -20,8 +18,9 @@ function HomePage() {
       {song ? (
         <>
           <div className="now-playing-header">
-            <Music size={20} />
-            <span className="now-playing-label">Now Playing:</span>
+            <span className="now-playing-pulse" />
+            <Music size={18} strokeWidth={2} color="var(--accent-primary)" />
+            <span className="now-playing-label">Now Playing</span>
             <span className="song-title">{song.title || 'Untitled'}</span>
           </div>
           <div className="two-column-layout">
@@ -36,11 +35,11 @@ function HomePage() {
       ) : (
         <div className="no-song">
           <div className="no-song-content">
-            <Music size={64} className="no-song-icon" />
+            <Music size={72} strokeWidth={1.5} className="no-song-icon" />
             <h2>No Song Loaded</h2>
-            <p>Add a song with lyrics to start learning!</p>
+            <p>Pick a song from your Playlist, or add a new one to start learning!</p>
             <Link to="/add" className="add-song-btn">
-              <PlusCircle size={20} />
+              <PlusCircle size={20} strokeWidth={2} />
               Add Your First Song
             </Link>
           </div>

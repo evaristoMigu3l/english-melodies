@@ -55,7 +55,7 @@ function PlaylistPage() {
     <div className="playlist-page">
       <header className="page-header">
         <div className="header-title">
-          <ListMusic size={28} />
+          <ListMusic size={32} strokeWidth={2} color="var(--accent-primary)" />
           <h1>My Playlist</h1>
         </div>
         <p>{songs.length} song{songs.length !== 1 ? 's' : ''} saved</p>
@@ -67,11 +67,11 @@ function PlaylistPage() {
         </div>
       ) : songs.length === 0 ? (
         <div className="empty-playlist">
-          <Music size={64} className="empty-icon" />
+          <Music size={64} strokeWidth={1.5} className="empty-icon" />
           <h2>No Songs Yet</h2>
           <p>Add your first song to build your playlist!</p>
           <Link to="/add" className="add-btn">
-            <PlusCircle size={20} />
+            <PlusCircle size={20} strokeWidth={2} />
             Add Song
           </Link>
         </div>
@@ -83,7 +83,7 @@ function PlaylistPage() {
                 {getYouTubeThumb(song.audio_url) ? (
                   <img src={getYouTubeThumb(song.audio_url)} alt={song.title} />
                 ) : (
-                  <Music size={32} className="default-thumb" />
+                  <Music size={36} strokeWidth={1.5} className="default-thumb" />
                 )}
               </div>
               <div className="song-info">
@@ -96,14 +96,14 @@ function PlaylistPage() {
                   className="play-btn"
                   onClick={() => playSong(song)}
                 >
-                  <Play size={16} />
+                  <Play size={18} strokeWidth={2} />
                   Play
                 </Link>
                 <button 
                   className="delete-btn"
                   onClick={() => deleteSong(song.id)}
                 >
-                  <Trash2 size={16} />
+                  <Trash2 size={18} strokeWidth={1.75} />
                 </button>
               </div>
             </div>
