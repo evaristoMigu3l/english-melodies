@@ -43,28 +43,41 @@ function AddSongPage() {
     e.preventDefault()
     setSaving(true)
     
-    const lyrics = parseLyrics(combinedLyrics)
-    const songData = { 
-      title: songTitle || 'Untitled Song',
-      audio_url: songUrl, 
-      lyrics
-    }
-    
-    const { data, error } = await supabase
-      .from('songs')
-      .insert([songData])
-      .select()
-      .single()
-    
-    if (error) {
-      console.error('Error saving song:', error)
-      alert('Failed to save song. Please try again.')
+    try {
+      const lyrics = parseLyrics(combinedLyrics)
+      
+      if (lyrics.length === 0) {
+        alert('Could not parse any lyrics. Make sure you have at least one line of text.')
+        setSaving(false)
+        return
+      }
+
+      const songData = { 
+        title: songTitle.trim() || 'Untitled Song',
+        audio_url: songUrl.trim(), 
+        lyrics
+      }
+      
+      const { data, error } = await supabase
+        .from('songs')
+        .insert([songData])
+        .select()
+        .single()
+      
+      if (error) {
+        console.error('Supabase error:', error)
+        alert(`Failed to save song: ${error.message}`)
+        setSaving(false)
+        return
+      }
+      
+      localStorage.setItem('currentSong', JSON.stringify(data))
+      navigate('/')
+    } catch (err) {
+      console.error('Unexpected error:', err)
+      alert(`Something went wrong: ${err.message}`)
       setSaving(false)
-      return
     }
-    
-    localStorage.setItem('currentSong', JSON.stringify(data))
-    navigate('/')
   }
 
   return (
