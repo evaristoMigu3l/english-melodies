@@ -1,83 +1,20 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
+import { Play, Pause } from 'lucide-react'
 import './MusicPlayer.css'
 
-function MusicPlayer({ audioUrl }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [player, setPlayer] = useState(null)
-  const iframeRef = useRef(null)
+const getYouTubeId = (url) => {
+  if (!url) return null
+  const match = url.match(/(?:youtu\.be\/|v\/|embed\/|watch\?v=|&v=)([^#&?]{11})/)
+  return match ? match[1] : null
+}
 
-  // Extract YouTube video ID from URL
-  const getYouTubeId = (url) => {
-    if (!url) return null
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-    const match = url.match(regExp)
-    return (match && match[7].length === 11) ? match[7] : null
-  }
+function MusicPlayer({ audioUrl }) {
+  const [launched, setLaunched] = useState(false)
 
   const videoId = getYouTubeId(audioUrl)
   const isYouTube = !!videoId
 
-  // Load YouTube IFrame API
-  useEffect(() => {
-    if (!isYouTube) return
-
-    // Load the YouTube IFrame API if not already loaded
-    if (!window.YT) {
-      const tag = document.createElement('script')
-      tag.src = 'https://www.youtube.com/iframe_api'
-      const firstScriptTag = document.getElementsByTagName('script')[0]
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-    }
-
-    // Initialize player when API is ready
-    const initPlayer = () => {
-      if (window.YT && window.YT.Player && iframeRef.current) {
-        const ytPlayer = new window.YT.Player(iframeRef.current, {
-          videoId: videoId,
-          height: '220',
-          width: '100%',
-          playerVars: {
-            autoplay: 0,
-            modestbranding: 1,
-            rel: 0,
-          },
-          events: {
-            onReady: (event) => {
-              setPlayer(event.target)
-            },
-            onStateChange: (event) => {
-              setIsPlaying(event.data === window.YT.PlayerState.PLAYING)
-            }
-          }
-        })
-      }
-    }
-
-    // Check if API is already loaded
-    if (window.YT && window.YT.Player) {
-      initPlayer()
-    } else {
-      window.onYouTubeIframeAPIReady = initPlayer
-    }
-
-    return () => {
-      if (player) {
-        player.destroy()
-      }
-    }
-  }, [videoId, isYouTube])
-
-  const togglePlay = () => {
-    if (player) {
-      if (isPlaying) {
-        player.pauseVideo()
-      } else {
-        player.playVideo()
-      }
-    }
-  }
-
-  // For non-YouTube URLs, use regular audio
+  // Non-YouTube: plain audio element
   if (!isYouTube) {
     return (
       <div className="music-player">
@@ -88,19 +25,33 @@ function MusicPlayer({ audioUrl }) {
     )
   }
 
+  const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`
+
   return (
     <div className="music-player">
-      <div className="player-wrapper">
-        <div ref={iframeRef} id="youtube-player"></div>
+      <div className="player-stage">
+        {!launched ? (
+          <div className="player-thumbnail" onClick={() => setLaunched(true)}>
+            <img src={thumbUrl} alt="Video thumbnail" className="thumb-img" />
+            <div className="thumb-overlay">
+              <button className="thumb-play-btn" aria-label="Play video">
+                <Play size={36} strokeWidth={0} fill="currentColor" />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="iframe-wrapper">
+            <iframe
+              src={embedUrl}
+              title="YouTube player"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              frameBorder="0"
+            />
+          </div>
+        )}
       </div>
-
-      <div className="controls">
-        <button onClick={togglePlay} className="play-button">
-          {isPlaying ? '⏸️ Pause' : '▶️ Play'}
-        </button>
-      </div>
-
-      <p className="source-label">🎥 Playing from YouTube</p>
     </div>
   )
 }
