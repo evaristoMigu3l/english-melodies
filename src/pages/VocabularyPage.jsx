@@ -229,7 +229,7 @@ function VocabularyPage() {
             <div className="empty-state" style={{ paddingTop: '3rem' }}>
               <Music size={64} strokeWidth={1.5} className="empty-icon" />
               <h2>No Songs Available</h2>
-              <p>Add some songs to your playlist first!</p>
+              <p>No songs are available yet. Check back soon!</p>
             </div>
           ) : (
             <div className="song-select-grid">

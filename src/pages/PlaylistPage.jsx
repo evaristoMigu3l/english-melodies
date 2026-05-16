@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ListMusic, PlayCircle, Trash, Music, PlusCircle } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
 import './PlaylistPage.css'
 
 function PlaylistPage() {
+  const { isAdmin } = useAuth()
   const [songs, setSongs] = useState([])
   const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     fetchSongs()
@@ -69,11 +72,17 @@ function PlaylistPage() {
         <div className="empty-playlist">
           <Music size={64} strokeWidth={1.5} className="empty-icon" />
           <h2>No Songs Yet</h2>
-          <p>Add your first song to build your playlist!</p>
-          <Link to="/add" className="add-btn">
-            <PlusCircle size={20} strokeWidth={2} />
-            Add Song
-          </Link>
+          {isAdmin ? (
+            <>
+              <p>Add your first song to build your playlist!</p>
+              <Link to="/add" className="add-btn">
+                <PlusCircle size={20} strokeWidth={2} />
+                Add Song
+              </Link>
+            </>
+          ) : (
+            <p>No songs have been added yet. Check back soon!</p>
+          )}
         </div>
       ) : (
         <div className="songs-grid">

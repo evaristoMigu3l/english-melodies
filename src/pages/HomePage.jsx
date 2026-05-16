@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Music, PlusCircle } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 import MusicPlayer from '../components/MusicPlayer'
 import LyricsDisplay from '../components/LyricsDisplay'
 import './HomePage.css'
 
 function HomePage() {
+  const { isAdmin } = useAuth()
   const [song, setSong] = useState(null)
 
   useEffect(() => {
@@ -37,11 +39,13 @@ function HomePage() {
           <div className="no-song-content">
             <Music size={72} strokeWidth={1.5} className="no-song-icon" />
             <h2>No Song Loaded</h2>
-            <p>Pick a song from your Playlist, or add a new one to start learning!</p>
-            <Link to="/add" className="add-song-btn">
-              <PlusCircle size={20} strokeWidth={2} />
-              Add Your First Song
-            </Link>
+            <p>Pick a song from your Playlist to start learning!</p>
+            {isAdmin && (
+              <Link to="/add" className="add-song-btn">
+                <PlusCircle size={20} strokeWidth={2} />
+                Add Your First Song
+              </Link>
+            )}
           </div>
         </div>
       )}
