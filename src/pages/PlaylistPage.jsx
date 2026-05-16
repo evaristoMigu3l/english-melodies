@@ -79,16 +79,18 @@ function PlaylistPage() {
         <div className="songs-grid">
           {songs.map((song) => (
             <div key={song.id} className="song-card">
-              <div className="song-thumb">
+              <div className="song-thumbnail">
                 {getYouTubeThumb(song.audio_url) ? (
                   <img src={getYouTubeThumb(song.audio_url)} alt={song.title} />
                 ) : (
-                  <Music size={36} strokeWidth={1.5} className="default-thumb" />
+                  <div className="song-thumbnail-placeholder">
+                    <Music size={40} strokeWidth={1.5} />
+                  </div>
                 )}
               </div>
               <div className="song-info">
-                <h3>{song.title || 'Untitled'}</h3>
-                <p>{song.lyrics?.length || 0} lines</p>
+                <h3 className="song-name">{song.title || 'Untitled'}</h3>
+                <span className="song-meta">{song.lyrics?.length || 0} lines</span>
               </div>
               <div className="song-actions">
                 <Link 
