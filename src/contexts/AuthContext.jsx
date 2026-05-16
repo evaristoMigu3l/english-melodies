@@ -5,6 +5,8 @@ const AuthContext = createContext({})
 
 export const useAuth = () => useContext(AuthContext)
 
+const ADMIN_EMAIL = 'evaristomiguelkakumba88@gmail.com'
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
@@ -110,10 +112,13 @@ export function AuthProvider({ children }) {
     setProfile(prev => ({ ...prev, generations_used: newCount }))
   }
 
+  const isAdmin = user?.email === ADMIN_EMAIL
+
   const value = {
     user,
     profile,
     loading,
+    isAdmin,
     signInWithGoogle,
     signOut,
     refreshProfile,

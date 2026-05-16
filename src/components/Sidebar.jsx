@@ -4,15 +4,16 @@ import { useAuth } from '../contexts/AuthContext'
 import './Sidebar.css'
 
 const navLinks = [
-  { to: '/',           icon: Music,     label: 'Now Playing' },
-  { to: '/playlist',   icon: ListMusic,  label: 'Playlist'    },
-  { to: '/vocabulary', icon: BookOpen,   label: 'Vocabulary'  },
-  { to: '/add',        icon: PlusCircle, label: 'Add Song'    },
-  { to: '/profile',    icon: User,       label: 'Profile'     },
+  { to: '/',           icon: Music,     label: 'Now Playing'              },
+  { to: '/playlist',   icon: ListMusic,  label: 'Playlist'                 },
+  { to: '/vocabulary', icon: BookOpen,   label: 'Vocabulary'               },
+  { to: '/add',        icon: PlusCircle, label: 'Add Song', adminOnly: true },
+  { to: '/profile',    icon: User,       label: 'Profile'                  },
 ]
 
 function Sidebar() {
-  const { profile } = useAuth()
+  const { profile, isAdmin } = useAuth()
+  const visibleLinks = navLinks.filter(link => !link.adminOnly || isAdmin)
 
   return (
     <aside className="sidebar">
@@ -30,7 +31,7 @@ function Sidebar() {
       {/* Navigation */}
       <nav className="sidebar-nav">
         <span className="nav-section-label">Menu</span>
-        {navLinks.map(({ to, icon: Icon, label }) => (
+        {visibleLinks.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
