@@ -536,8 +536,62 @@
   .cards-grid {
     grid-template-columns: 1fr;
   }
-  
+
+  /* Quiz card mobile fixes */
   .quiz-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .quiz-container {
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+
+  .definition-hint {
+    font-size: 1.2rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Stack input + button vertically */
+  .quiz-input-section {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quiz-input-section input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .quiz-input-section .primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Results card */
+  .quiz-results {
+    padding: 2.5rem 1.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .quiz-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quiz-actions .primary-btn,
+  .quiz-actions .secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .score {
+    font-size: 3.5rem;
   }
 }
+
