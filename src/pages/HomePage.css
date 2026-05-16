@@ -147,4 +147,6 @@
   .two-column-layout { grid-template-columns: 1fr; overflow: visible; }
   .lyrics-column { overflow: visible; }
   .no-song-content { padding: 3rem 2rem; }
+  /* On mobile there's a 72px bottom nav + 2rem vertical padding */
+  .no-song { min-height: calc(100vh - 72px - 2rem); }
 }
