@@ -110,12 +110,14 @@ function PlaylistPage() {
                   <PlayCircle size={18} strokeWidth={2} />
                   Play
                 </Link>
-                <button 
-                  className="action-btn btn-delete"
-                  onClick={() => deleteSong(song.id)}
-                >
-                  <Trash size={18} strokeWidth={2} />
-                </button>
+                {isAdmin && (
+                  <button 
+                    className="action-btn btn-delete"
+                    onClick={() => deleteSong(song.id)}
+                  >
+                    <Trash size={18} strokeWidth={2} />
+                  </button>
+                )}
               </div>
             </div>
           ))}
