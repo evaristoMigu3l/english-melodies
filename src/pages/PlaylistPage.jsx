@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ListMusic, Play, Trash2, Music, PlusCircle } from 'lucide-react'
+import { ListMusic, PlayCircle, Trash, Music, PlusCircle } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import './PlaylistPage.css'
 
@@ -93,17 +93,17 @@ function PlaylistPage() {
               <div className="song-actions">
                 <Link 
                   to="/" 
-                  className="play-btn"
+                  className="action-btn btn-play"
                   onClick={() => playSong(song)}
                 >
-                  <Play size={18} strokeWidth={2} />
+                  <PlayCircle size={18} strokeWidth={2} />
                   Play
                 </Link>
                 <button 
-                  className="delete-btn"
+                  className="action-btn btn-delete"
                   onClick={() => deleteSong(song.id)}
                 >
-                  <Trash2 size={18} strokeWidth={1.75} />
+                  <Trash size={18} strokeWidth={2} />
                 </button>
               </div>
             </div>

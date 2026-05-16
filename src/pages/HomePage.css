@@ -1,5 +1,5 @@
 .home-page {
-  height: 100vh;
+  height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -64,6 +64,7 @@
 .player-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 100%;
   overflow: hidden;
 }
