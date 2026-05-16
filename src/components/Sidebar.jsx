@@ -8,6 +8,7 @@ const navLinks = [
   { to: '/playlist',   icon: ListMusic,  label: 'Playlist'    },
   { to: '/vocabulary', icon: BookOpen,   label: 'Vocabulary'  },
   { to: '/add',        icon: PlusCircle, label: 'Add Song'    },
+  { to: '/profile',    icon: User,       label: 'Profile'     },
 ]
 
 function Sidebar() {
@@ -34,7 +35,9 @@ function Sidebar() {
             key={to}
             to={to}
             end={to === '/'}
-            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+            className={({ isActive }) =>
+              `nav-item${isActive ? ' active' : ''}${to === '/profile' ? ' profile-nav-item' : ''}`
+            }
           >
             <span className="nav-item-icon">
               <Icon size={18} strokeWidth={2} />

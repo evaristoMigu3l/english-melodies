@@ -120,6 +120,11 @@
 }
 
 /* ── User card ── */
+/* Profile is accessed via user card on desktop; hidden from nav */
+.profile-nav-item {
+  display: none;
+}
+
 .sidebar-user {
   padding: 16px;
   border-top: 1px solid var(--border-glass);
@@ -229,5 +234,10 @@
   .nav-item-icon {
     width: 24px;
     height: 24px;
+  }
+
+  /* Show the Profile nav item only on mobile */
+  .nav-item.profile-nav-item {
+    display: flex;
   }
 }
