@@ -337,7 +337,11 @@ function VocabularyPage() {
                 <div className="vocab-word">
                   <div className="word-header-info">
                     <h3>{item.word}</h3>
-                    {item.pronunciation && <span className="pronunciation">{item.pronunciation}</span>}
+                    {item.pronunciation && (
+                      <span className="pronunciation" title="Como pronunciar em português">
+                        🔊 {item.pronunciation}
+                      </span>
+                    )}
                   </div>
                   <span className="pos">{item.partOfSpeech}</span>
                 </div>
