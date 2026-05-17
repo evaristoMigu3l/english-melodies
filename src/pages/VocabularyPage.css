@@ -371,13 +371,20 @@
   padding: 0.5rem 1rem;
 }
 
-.example-sentence mark {
-  background-color: var(--bg-tertiary);
+.example-sentence mark,
+.vocab-highlight {
+  background: rgba(167, 139, 250, 0.25);
   color: var(--text-primary);
-  padding: 0.1rem 0.35rem;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  border: 1px solid var(--border-glass);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-style: normal;
+  border-bottom: 2px solid rgba(167, 139, 250, 0.6);
+  transition: background 0.2s ease;
+}
+
+.vocab-highlight:hover {
+  background: rgba(167, 139, 250, 0.4);
 }
 
 .quiz-container {

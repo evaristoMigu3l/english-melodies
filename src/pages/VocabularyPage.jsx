@@ -342,11 +342,13 @@ function VocabularyPage() {
                   <span className="pos">{item.partOfSpeech}</span>
                 </div>
                 <div className="vocab-definition">
-                  <p><strong>Definition:</strong> {item.definition}</p>
+                  <p><strong>Definição:</strong> {item.definition}</p>
                   <p className="example-sentence">
-                    "{item.example.split(/\*\*(.*?)\*\*/g).map((part, i) => 
-                      i % 2 === 1 ? <mark key={i}>{part}</mark> : part
-                    )}"
+                    &ldquo;{(item.example || '').split(/\*\*([^*]+)\*\*/).map((part, i) =>
+                      i % 2 === 1
+                        ? <mark key={i} className="vocab-highlight">{part}</mark>
+                        : part
+                    )}&rdquo;
                   </p>
                 </div>
               </div>
